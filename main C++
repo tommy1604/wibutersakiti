@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string words[] = {"hutao", "emilia", "keqing", "zerotwo", "raidenei"};
+    const int n = sizeof(words) / sizeof(words[0]);
+    srand(time(0));
+    int index = rand() % n;
+    string word = words[index];
+    int length = word.length();
+    string hidden(length, '-');
+    int tries = 0;
+    int maxTries = 100;
+    
+    cout << "Dibuat Karena Gabut, Tebak Waifuku!" << endl;
+    cout << "Waifuku ada " << length << " huruf." << endl;
+    
+    while (tries < maxTries) {
+        cout << "Ndang bedek en waifuku sopo: ";
+        char guess;
+        cin >> guess;
+        
+        bool correct = false;
+        for (int i = 0; i < length; i++) {
+            if (word[i] == guess) {
+                hidden[i] = guess;
+                correct = true;
+            }
+        }
+        
+        if (correct) {
+            cout << "Masokk Pakk Ekoo!" << endl;
+            cout << hidden << endl;
+        } else {
+            cout << "Salah Mendoo!" << endl;
+            tries++;
+        }
+        
+        if (hidden == word) {
+            cout << "Selamat, Anda sudah bisa menebak Waifuku!" << endl;
+            break;
+        }
+    }
+    
+    if (tries == maxTries) {
+        cout << "Maaf, Anda kakean nyebott jembod. waifuku iku " << word << "." << endl;
+    }
+    
+    return 0;
+}
